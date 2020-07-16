@@ -42,6 +42,7 @@ app.use("/api/users", UsersController);
  * APP LISTEN
  */
 db.sequelize
+  //   .sync({ force: true })
   .sync()
   .then(() => {
     // Start our server so that it can begin listening to client requests.
