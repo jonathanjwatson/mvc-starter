@@ -1,6 +1,6 @@
 module.exports = function (sequelize, DataTypes) {
   const Alert = sequelize.define("Alert", {
-    url: DataTypes.STRING,
+    url: DataTypes.TEXT,
     imageURL: DataTypes.STRING,
     title: DataTypes.STRING,
     price: DataTypes.STRING,

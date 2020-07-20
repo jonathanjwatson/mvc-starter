@@ -19,8 +19,15 @@ router.get("/dashboard/:id", (req, res) => {
     include: [db.Alert],
   })
     .then((foundUser) => {
-      console.log(foundUser);
-      res.render("dashboard", { id: foundUser.id });
+      //   console.log(foundUser);
+      //   console.log(foundUser.Alerts[0].title);
+      let object = {
+        id: foundUser.id,
+      };
+      if (foundUser.Alerts) {
+        object.alerts = foundUser.Alerts;
+      }
+      res.render("dashboard", object);
     })
     .catch((err) => {
       res.render("404");

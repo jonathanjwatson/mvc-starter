@@ -4,6 +4,10 @@
  */
 const express = require("express");
 const exphbs = require("express-handlebars");
+const {
+  allowInsecurePrototypeAccess,
+} = require("@handlebars/allow-prototype-access");
+const handlebars = require("handlebars");
 
 /**
  * DEFINE VARIABLES
@@ -23,7 +27,14 @@ const AlertsController = require("./controllers/alertsController");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Handlebars setup
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+
+app.engine(
+  "handlebars",
+  exphbs({
+    defaultLayout: "main",
+    handlebars: allowInsecurePrototypeAccess(handlebars),
+  })
+);
 app.set("view engine", "handlebars");
 
 /**

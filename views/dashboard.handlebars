@@ -14,4 +14,12 @@
             <a class="waves-effect waves-light btn" href="/dashboard/{{id}}/new-alert">Create new alert</a>
         </div>
     </div>
+    <div class="row">
+        {{#each alerts}}
+        <img src="{{imageURL}}">
+        <h3>{{title}}</h3>
+        <p>{{price}}</p>
+        <a href="{{url}}">View item</a>
+        {{/each}}
+    </div>
 </div>

@@ -20,9 +20,13 @@
   },
   "homepage": "https://github.com/jonathanjwatson/mvc-starter#readme",
   "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.3",
+    "axios": "^0.19.2",
     "bcrypt": "^5.0.0",
+    "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
-    "express-handlebars": "^3.0.0",
+    "express-handlebars": "^3.1.0",
+    "handlebars": "^4.5.3",
     "mysql2": "^2.1.0",
     "sequelize": "^6.3.3"
   }

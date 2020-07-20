@@ -1,25 +1,70 @@
 const express = require("express");
+const cheerio = require("cheerio");
+const axios = require("axios");
 const router = express.Router();
 const db = require("../models");
 
 // /api/alerts/
 router.post("/", (req, res) => {
-  console.log("Actually hit this controller");
   console.log(req.body);
-  db.Alert.create(req.body)
-    .then((result) => {
-      res.json({
-        error: false,
-        data: result,
-        message: "Successfully created new alert",
-      });
+  axios
+    .get(req.body.url)
+    .then(({ data }) => {
+      console.log("======================");
+      //   console.log(data);
+      //   console.log(result);
+      const $ = cheerio.load(data);
+      //   console.log($);
+      const name = $("#productTitle").text().trim();
+      const dealPriceEl = $("#priceblock_dealprice");
+      const ourPriceEl = $("#priceblock_ourprice");
+      let price;
+      if (dealPriceEl.text()) {
+        console.log("dealprice");
+        console.log(dealPriceEl.text());
+        price = dealPriceEl.text().trim();
+      } else if (ourPriceEl.text()) {
+        console.log("our price");
+        console.log(ourPriceEl.text());
+        price = ourPriceEl.text().trim();
+      } else {
+        console.log("Neither of those matched");
+      }
+      console.log("Price: ", price);
+      //   const landingImage = $("#landingImage").attr("src");
+      //   console.log(name);
+      //   console.log(price);
+      //   console.log("======================");
+      //   console.log(landingImage);
+      console.log("======================");
+      console.log(req.body.url);
+      db.Alert.create({
+        url: req.body.url,
+        title: name,
+        price: price,
+        UserId: req.body.UserId,
+      })
+        .then((result) => {
+          res.json({
+            error: false,
+            data: result,
+            message: "Successfully created new alert",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(500).json({
+            error: true,
+            data: null,
+            message: "Unable to create new alert.",
+          });
+        });
     })
     .catch((err) => {
-      console.log(err);
       res.status(500).json({
         error: true,
         data: null,
-        message: "Unable to create new alert.",
+        message: "An error occurred creating your alert.",
       });
     });
 });
