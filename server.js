@@ -15,6 +15,7 @@ const ViewsController = require("./controllers/viewsController.js");
 const APIController = require("./controllers/apiController");
 const UsersController = require("./controllers/usersController");
 const AuthController = require("./controllers/authController");
+const AlertsController = require("./controllers/alertsController");
 /**
  * MIDDLEWARE
  */
@@ -36,6 +37,7 @@ app.use(express.static("public"));
 app.use(ViewsController);
 app.use(APIController);
 app.use("/api/users", UsersController);
+app.use("/api/alerts", AlertsController);
 app.use("/api/auth", AuthController);
 
 // AUTHENTICATION VS AUTHORIZATION

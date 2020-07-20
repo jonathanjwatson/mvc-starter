@@ -1,0 +1,50 @@
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Product Alert</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/signout">Sign Out</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <form id="new-alert-form">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input placeholder="Product URL" id="productUrl" type="text">
+                        <label for="productUrl">Product URL</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="id" type="hidden" value="{{id}}">
+                    </div>
+                </div>
+                <div class=" row center-align">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Add Alert
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(() => {
+        $("#new-alert-form").on("submit", (event) => {
+            event.preventDefault();
+            const url = $("#productUrl").val();
+            const UserId = $("#id").val();
+
+            $.post("/api/alerts", { url, UserId })
+                .then(response => {
+                    console.log(response);
+                    window.location.replace(`/dashboard/${UserId}`)
+                }).fail(err => {
+                    console.log(err);
+                })
+        })
+    })
+</script>

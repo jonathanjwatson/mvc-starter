@@ -4,6 +4,8 @@ const db = require("../models");
 
 // /api/alerts/
 router.post("/", (req, res) => {
+  console.log("Actually hit this controller");
+  console.log(req.body);
   db.Alert.create(req.body)
     .then((result) => {
       res.json({

@@ -16,14 +16,19 @@ router.get("/dashboard/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
-    // include
+    include: [db.Alert],
   })
     .then((foundUser) => {
-      res.render("dashboard", {id: foundUser.id});
+      console.log(foundUser);
+      res.render("dashboard", { id: foundUser.id });
     })
     .catch((err) => {
       res.render("404");
     });
+});
+
+router.get("/dashboard/:id/new-alert", (req, res) => {
+  res.render("newAlert", { id: req.params.id });
 });
 
 module.exports = router;
