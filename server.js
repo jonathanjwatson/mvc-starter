@@ -14,7 +14,7 @@ const db = require("./models");
 const ViewsController = require("./controllers/viewsController.js");
 const APIController = require("./controllers/apiController");
 const UsersController = require("./controllers/usersController");
-
+const AuthController = require("./controllers/authController");
 /**
  * MIDDLEWARE
  */
@@ -36,14 +36,22 @@ app.use(express.static("public"));
 app.use(ViewsController);
 app.use(APIController);
 app.use("/api/users", UsersController);
+app.use("/api/auth", AuthController);
+
+// AUTHENTICATION VS AUTHORIZATION
+// Authentication answers: Who are you?
+// Authorization answers: What do you do?
+
+// Authentication
+// Does your password match your user account?
 
 /**
  * DB Connection
  * APP LISTEN
  */
 db.sequelize
-    .sync({ force: true })
-//   .sync()
+  .sync()
+  //   .sync()
   .then(() => {
     // Start our server so that it can begin listening to client requests.
     app.listen(PORT, function () {

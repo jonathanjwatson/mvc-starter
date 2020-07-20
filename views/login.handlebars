@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(() => {
+        console.log("Hello world");
+        $("#login-form").on("submit", (event) => {
+            event.preventDefault();
+            const email = $("#email").val();
+            const password = $("#password").val();
+            $.post("/api/auth", { email, password })
+                .then(response => {
+                    console.log(response);
+                    window.location.replace(`/dashboard/${response.data.id}`)
+                })
+        })
+    })
+</script>
