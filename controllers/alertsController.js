@@ -20,17 +20,12 @@ router.post("/", (req, res) => {
       const ourPriceEl = $("#priceblock_ourprice");
       let price;
       if (dealPriceEl.text()) {
-        console.log("dealprice");
-        console.log(dealPriceEl.text());
         price = dealPriceEl.text().trim();
       } else if (ourPriceEl.text()) {
-        console.log("our price");
-        console.log(ourPriceEl.text());
         price = ourPriceEl.text().trim();
       } else {
         console.log("Neither of those matched");
       }
-      console.log("Price: ", price);
       //   const landingImage = $("#landingImage").attr("src");
       //   console.log(name);
       //   console.log(price);

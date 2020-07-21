@@ -16,10 +16,10 @@
     </div>
     <div class="row">
         {{#each alerts}}
-        <img src="{{imageURL}}">
-        <h3>{{title}}</h3>
-        <p>{{price}}</p>
-        <a href="{{url}}">View item</a>
+        <img src="{{this.imageURL}}">
+        <h3>{{this.title}}</h3>
+        <p>{{this.price}}</p>
+        <a href="{{this.url}}">View item</a>
         {{/each}}
     </div>
 </div>
