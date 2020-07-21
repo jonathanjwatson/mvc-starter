@@ -37,7 +37,11 @@ router.post("/", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.json(err);
+      res.status(400).json({
+        error: true,
+        data: null,
+        message: "Failed to authenticate user.",
+      });
     });
 });
 

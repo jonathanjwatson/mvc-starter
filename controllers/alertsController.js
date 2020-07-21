@@ -10,9 +10,6 @@ router.post("/", (req, res) => {
   axios
     .get(req.body.url)
     .then(({ data }) => {
-      console.log("======================");
-      //   console.log(data);
-      //   console.log(result);
       const $ = cheerio.load(data);
       //   console.log($);
       const name = $("#productTitle").text().trim();
@@ -31,8 +28,6 @@ router.post("/", (req, res) => {
       //   console.log(price);
       //   console.log("======================");
       //   console.log(landingImage);
-      console.log("======================");
-      console.log(req.body.url);
       db.Alert.create({
         url: req.body.url,
         title: name,
@@ -51,15 +46,15 @@ router.post("/", (req, res) => {
           res.status(500).json({
             error: true,
             data: null,
-            message: "Unable to create new alert.",
+            message: "Unable to create new alert with data provided. Please try again.",
           });
         });
     })
     .catch((err) => {
-      res.status(500).json({
+      res.status(404).json({
         error: true,
         data: null,
-        message: "An error occurred creating your alert.",
+        message: "Unable to find your request URL. Please try a different URL.",
       });
     });
 });

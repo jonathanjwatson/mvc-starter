@@ -43,7 +43,10 @@
                     console.log(response);
                     window.location.replace(`/dashboard/${UserId}`)
                 }).fail(err => {
-                    console.log(err);
+                    console.log(err.responseJSON);
+                    if (err.responseJSON.error) {
+                        alert(err.responseJSON.message);
+                    }
                 })
         })
     })
