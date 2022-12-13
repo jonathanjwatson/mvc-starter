@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/jonathanjwatson/mvc-starter#readme",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-handlebars": "^3.0.0",
     "mysql2": "^2.1.0",
     "sequelize": "^6.3.3"
